@@ -22,11 +22,6 @@ public class Game : MonoBehaviour
 
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
-    void Awake()
-    {
-        //board.Initialize(boardSize, tileContentFactory);
-    }
-
     void OnValidate()
     {
         // min size is 2x2
@@ -42,28 +37,6 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        // Build board
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    HandleTouch(KeyCode.W);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha0))
-        //{
-        //    HandleTouch(KeyCode.Alpha0);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    HandleTouch(KeyCode.D);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    HandleTouch(KeyCode.S);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    HandleTouch(KeyCode.T);
-        //}
-
         // Gameplay
         if (Input.GetMouseButtonDown(0))
         {
@@ -87,21 +60,5 @@ public class Game : MonoBehaviour
         Enemy enemy = enemyFactory.Get();
         enemy.SpawnOn(spawnPoint);
         enemy.SetDestination(board.destination);
-    }
-
-    void HandleTouch(KeyCode key)
-    {
-        GameTile tile = board.GetTile(TouchRay);
-        if (tile != null)
-        {
-            switch (key)
-            {
-                case KeyCode.W: tile.Content = tileContentFactory.Get(GameTileContentType.Wall); break;
-                case KeyCode.Alpha0: tile.Content = tileContentFactory.Get(GameTileContentType.Empty); break;
-                case KeyCode.D: tile.Content = tileContentFactory.Get(GameTileContentType.Destination); break;
-                case KeyCode.S: tile.Content = tileContentFactory.Get(GameTileContentType.Spawn); break;
-                case KeyCode.T: tile.Content = tileContentFactory.Get(GameTileContentType.Tree); break;
-            }
-        }
     }
 }

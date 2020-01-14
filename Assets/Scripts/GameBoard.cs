@@ -54,8 +54,7 @@ public class GameBoard : MonoBehaviour
         }
         for (int i = 0; i < tiles.Length; i++)
         {
-            //contentFactory.Reclaim(tiles[i].Content);
-            CustomDestroy.SafeDestroyGameObject(tiles[i]);
+            tiles[i].Content = contentFactory.Get(GameTileContentType.Empty);
         }
     }
 
