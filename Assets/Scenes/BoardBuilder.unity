@@ -420,8 +420,10 @@ MonoBehaviour:
   tilePrefab: {fileID: -5342007544768961881, guid: 9917b9d2bf1478c41948e5b8de8b6d84,
     type: 3}
   contentFactory: {fileID: 11400000, guid: 4874e38592000cd4d87457bebe6b5c1d, type: 2}
-  destination: {fileID: 0}
   navmesh: {fileID: 0}
+  destinationsGroupingObject: {fileID: 0}
+  spawnPointsGroupingObject: {fileID: 0}
+  othersGroupingObject: {fileID: 0}
 --- !u!4 &655447503
 Transform:
   m_ObjectHideFlags: 0

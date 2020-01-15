@@ -18,18 +18,14 @@ public class GameBoard : MonoBehaviour
 
     public GameTileContentFactory contentFactory;
 
-    List<GameTile> spawnPoints = new List<GameTile>();
-
-    public int SpawnPointCount => spawnPoints.Count;
-
-    public GameTile GetSpawnPoint(int index)
-    {
-        return spawnPoints[index];
-    }
-
-    public GameTile destination;
-
     public NavMeshSurface navmesh;
+
+    // For grouping in editor only, do not use it in gameplay
+    public GameObject destinationsGroupingObject;
+    // For grouping in editor only, do not use it in gameplay
+    public GameObject spawnPointsGroupingObject;
+    // For grouping in editor only, do not use it in gameplay
+    public GameObject othersGroupingObject;
 
     public void ReadBoardFromText(string filename)
     {
@@ -54,7 +50,10 @@ public class GameBoard : MonoBehaviour
         }
         for (int i = 0; i < tiles.Length; i++)
         {
-            tiles[i].Content = contentFactory.Get(GameTileContentType.Empty);
+            if (tiles[i] != null)
+            {
+                tiles[i].Content = contentFactory.Get(GameTileContentType.Empty);
+            }
         }
     }
 
@@ -67,9 +66,9 @@ public class GameBoard : MonoBehaviour
                 for (int x = 0; x < size.x; x++, i++)
                 {
                     GameTile tile = tiles[i];
-                    switch(tile.Content.Type)
+                    switch (tile.Content.Type)
                     {
-                        case GameTileContentType.Empty: file.Write("0");break;
+                        case GameTileContentType.Empty: file.Write("0"); break;
                         case GameTileContentType.Tree: file.Write("T"); break;
                         case GameTileContentType.Destination: file.Write("D"); break;
                         case GameTileContentType.Spawn: file.Write("S"); break;
@@ -100,7 +99,6 @@ public class GameBoard : MonoBehaviour
     {
         ClearBoard();
         this.size = size;
-        this.contentFactory = contentFactory;
         ground.localScale = new Vector3(size.x, size.y, 1f);
 
         Vector2 offset = new Vector2(
@@ -169,13 +167,13 @@ public class GameBoard : MonoBehaviour
                     case 'D':
                         {
                             tile.Content = contentFactory.Get(GameTileContentType.Destination);
-                            destination = tile;
+                            tile.transform.SetParent(destinationsGroupingObject.transform);
                             break;
                         }
                     case 'S':
                         {
                             tile.Content = contentFactory.Get(GameTileContentType.Spawn);
-                            spawnPoints.Add(tile);
+                            tile.transform.SetParent(spawnPointsGroupingObject.transform);
                             break;
                         }
                     case 'W': tile.Content = contentFactory.Get(GameTileContentType.Wall); break;
@@ -183,8 +181,16 @@ public class GameBoard : MonoBehaviour
                     case 'R': tile.Content = contentFactory.Get(GameTileContentType.Tree); break;
                     default: Debug.LogError($"Unknown type {data[x][y]} at [{x}][{y}]"); break;
                 }
+
+                if (data[y][x] != 'D' && data[y][x] != 'S')
+                {
+                    tile.transform.SetParent(othersGroupingObject.transform);
+                }
+
+                tile.Content.gameObject.transform.SetParent(tile.gameObject.transform);
             }
         }
+
         navmesh.BuildNavMesh();
     }
 }

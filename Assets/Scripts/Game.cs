@@ -14,13 +14,21 @@ public class Game : MonoBehaviour
     GameTileContentFactory tileContentFactory = default;
 
     [SerializeField]
-    EnemyFactory enemyFactory = default;
+    PlayerStatsManager player;
 
-    [SerializeField, Range(0.1f, 10f)]
-    float spawnSpeed = 1f;
-    float spawnProgress;
+    static Game instance;
+
+    const float pausedTimeScale = 0f;
+
+    [SerializeField, Range(1f, 10f)]
+    float playSpeed = 1f;
 
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
+
+    void OnEnable()
+    {
+        instance = this;
+    }
 
     void OnValidate()
     {
@@ -37,6 +45,17 @@ public class Game : MonoBehaviour
 
     void Update()
     {
+        // Time control for testing
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Time.timeScale =
+                Time.timeScale > pausedTimeScale ? pausedTimeScale : playSpeed;
+        }
+        else if (Time.timeScale > pausedTimeScale)
+        {
+            Time.timeScale = playSpeed;
+        }
+
         // Gameplay
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,21 +63,5 @@ public class Game : MonoBehaviour
             if (tile?.Content.Type == GameTileContentType.Wall)
                 tile.Content = tileContentFactory.Get(GameTileContentType.Tower);
         }
-
-        spawnProgress += spawnSpeed * Time.deltaTime;
-        while (spawnProgress >= 1f)
-        {
-            spawnProgress -= 1f;
-            SpawnEnemy();
-        }
-    }
-
-    private void SpawnEnemy()
-    {
-        GameTile spawnPoint =
-            board.GetSpawnPoint(Random.Range(0, board.SpawnPointCount));
-        Enemy enemy = enemyFactory.Get();
-        enemy.SpawnOn(spawnPoint);
-        enemy.SetDestination(board.destination);
     }
 }
