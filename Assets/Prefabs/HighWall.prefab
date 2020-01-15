@@ -88,7 +88,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6358313797096566409}
   - component: {fileID: 7351289032045905098}
-  - component: {fileID: -1474169005462959467}
   - component: {fileID: 6053510427734746463}
   m_Layer: 0
   m_Name: HighWall
@@ -126,20 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  canvas: {fileID: 0}
---- !u!114 &-1474169005462959467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7955078145817779354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209b0738d5deeee498c792ab9e251392, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
 --- !u!208 &6053510427734746463
 NavMeshObstacle:
   m_ObjectHideFlags: 0

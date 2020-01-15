@@ -5,6 +5,10 @@ public class Enemy : MonoBehaviour
 {
 	NavMeshAgent agent;
 	EnemyFactory originFactory;
+	public int damage = 10;
+	public int health = 100;
+
+	public PlayerStatsManager player;
 
 	void Awake()
 	{
@@ -21,13 +25,25 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
-	public void SpawnOn(GameTile tile)
+	public void Initialize(int health)
 	{
-		agent.Warp(tile.transform.position);
+		this.health = health;
 	}
 
-	public void SetDestination(GameTile tile)
+
+	public void SpawnOn(Transform transform)
 	{
-		agent.SetDestination(tile.transform.position);
+		agent.Warp(transform.position);
+	}
+
+	public void SetDestination(Transform transform)
+	{
+		agent.SetDestination(transform.position);
+	}
+
+	public void OnReachDestination()
+	{
+		player.healthController.Damage(damage);
+		originFactory.Reclaim(this);
 	}
 }

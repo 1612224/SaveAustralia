@@ -6,8 +6,6 @@ public class GameTileContent : MonoBehaviour
 	[SerializeField]
 	GameTileContentType type = default;
 
-	public Canvas canvas;
-
 	public GameTileContentType Type => type;
 
 	GameTileContentFactory originFactory;
