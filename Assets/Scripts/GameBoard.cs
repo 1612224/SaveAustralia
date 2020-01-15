@@ -9,11 +9,13 @@ public class GameBoard : MonoBehaviour
     [SerializeField]
     Transform ground = default;
 
+    [SerializeField]
     Vector2Int size;
 
     [SerializeField]
     GameTile tilePrefab = default;
 
+    [SerializeField]
     GameTile[] tiles;
 
     public GameTileContentFactory contentFactory;
@@ -57,6 +59,18 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    public void ClearTiles()
+    {
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i] != null)
+            {
+                contentFactory.Reclaim(tiles[i].Content);
+                CustomDestroy.SafeDestroy(tiles[i].gameObject);
+            }
+        }
+    }
+
     public void SaveToText(string filename)
     {
         using (var file = new StreamWriter(filename))
@@ -73,7 +87,7 @@ public class GameBoard : MonoBehaviour
                         case GameTileContentType.Destination: file.Write("D"); break;
                         case GameTileContentType.Spawn: file.Write("S"); break;
                         case GameTileContentType.Wall: file.Write("W"); break;
-                        case GameTileContentType.Tower: file.Write("R"); break;
+                        case GameTileContentType.RockTower: file.Write("R"); break;
                     }
                 }
                 file.Write("\n");
@@ -83,7 +97,7 @@ public class GameBoard : MonoBehaviour
 
     public GameTile GetTile(Ray ray)
     {
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, 1))
         {
             int x = (int)(hit.point.x + size.x * 0.5f);
             int y = (int)(hit.point.z + size.y * 0.5f);
@@ -116,15 +130,6 @@ public class GameBoard : MonoBehaviour
                     x - offset.x, 0f, y - offset.y
                 );
 
-                if (x > 0)
-                {
-                    GameTile.MakeEastWestNeighbors(tile, tiles[i - 1]);
-                }
-                if (y > 0)
-                {
-                    GameTile.MakeNorthSouthNeighbors(tile, tiles[i - size.x]);
-                }
-
                 tile.Content = contentFactory.Get(GameTileContentType.Empty);
             }
         }
@@ -151,15 +156,6 @@ public class GameBoard : MonoBehaviour
                 tile.transform.localPosition = new Vector3(
                     x - offset.x, 0f, y - offset.y
                 );
-
-                if (x > 0)
-                {
-                    GameTile.MakeEastWestNeighbors(tile, tiles[i - 1]);
-                }
-                if (y > 0)
-                {
-                    GameTile.MakeNorthSouthNeighbors(tile, tiles[i - size.x]);
-                }
 
                 switch (data[y][x])
                 {

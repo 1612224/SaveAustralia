@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3608611064451949781}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -44,7 +44,8 @@ GameObject:
   - component: {fileID: 1176294542755258951}
   - component: {fileID: 4648450057522188204}
   - component: {fileID: 4437423435205478036}
-  m_Layer: 0
+  - component: {fileID: 3565341567483199311}
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -139,6 +140,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3565341567483199311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258305479486349345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba5beb3a3307954f92f30b0479dda41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5049212047837997333
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +163,7 @@ GameObject:
   - component: {fileID: 8740890011419940429}
   - component: {fileID: 6068853840505413365}
   - component: {fileID: 1876035761012185354}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LargeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

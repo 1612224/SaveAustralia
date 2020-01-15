@@ -18,6 +18,12 @@ public class BoardImporter
         Selection.activeGameObject.GetComponent<GameBoard>().ClearBoard();
     }
 
+    [MenuItem("Map Importer/Clear Tiles")]
+    static void ClearTiles()
+    {
+        Selection.activeGameObject.GetComponent<GameBoard>().ClearTiles();
+    }
+
     [MenuItem("Map Importer/Export Board")]
     static void ExportBoard()
     {

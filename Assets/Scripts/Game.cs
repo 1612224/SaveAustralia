@@ -16,6 +16,9 @@ public class Game : MonoBehaviour
     [SerializeField]
     PlayerStatsManager player;
 
+    [SerializeField]
+    TowerFactory towerFactory = default;
+
     static Game instance;
 
     const float pausedTimeScale = 0f;
@@ -56,12 +59,6 @@ public class Game : MonoBehaviour
             Time.timeScale = playSpeed;
         }
 
-        // Gameplay
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameTile tile = board.GetTile(TouchRay);
-            if (tile?.Content.Type == GameTileContentType.Wall)
-                tile.Content = tileContentFactory.Get(GameTileContentType.Tower);
-        }
+        Physics.SyncTransforms();
     }
 }

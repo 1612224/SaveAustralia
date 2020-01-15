@@ -1,56 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TowerGroupController : MonoBehaviour
 {
+    [SerializeField]
+    GameBoard board;
 
-    private bool _a_tower_is_clicked = false;
+    [Header("Touch Events")]
+    public TileTouchEvent towerTouchEvent;
+    public TileTouchEvent wallTouchEvent;
+    public UnityEvent touchOnNothingEvent;
 
-    // Update is called once per frame
+    [SerializeField]
+    PanelsController panelsController;
+
+    Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
+
+    void Awake()
+    {
+        if (towerTouchEvent == null)
+        {
+            towerTouchEvent = new TileTouchEvent();
+        }
+        if (wallTouchEvent == null)
+        {
+            wallTouchEvent = new TileTouchEvent();
+        }
+        if (touchOnNothingEvent == null)
+        {
+            touchOnNothingEvent = new UnityEvent();
+        }
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !panelsController.AnyPanelActive)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            
-            if(Physics.Raycast(ray,out hit))
+            GameTile tile = board.GetTile(TouchRay);
+            Debug.Log(tile.Content.Type);
+            if (tile == null)
             {
-               ClickHandller(hit.transform);
+                touchOnNothingEvent.Invoke();
+            }
+            else if (tile.Content.Type == GameTileContentType.Tower) 
+            {
+                towerTouchEvent.Invoke(tile);
+            } 
+            else if (tile.Content.Type == GameTileContentType.Wall) 
+            {
+                wallTouchEvent.Invoke(tile);
+            } else
+            {
+                touchOnNothingEvent.Invoke();
             }
         }
     }
-
-    private void ClickHandller(Transform ClickedObject)
-    {
-
-        TowerController script = ClickedObject.gameObject.GetComponentInParent<TowerController>();
-        
-
-        if(script != null)
-        {
-            if (!_a_tower_is_clicked)
-            {
-                Debug.Log("clicked");
-                _a_tower_is_clicked = true;
-                script.Click(null, 0);
-            }
-            else if(script.IsChildUIButtonClicked(ClickedObject))
-            {
-                Debug.Log("child clicked");
-                _a_tower_is_clicked = false;
-                script.Click(ClickedObject, 100);
-            }
-            else
-            {
-                _a_tower_is_clicked = false;
-                script.Click(null, 0);
-            }
-
-        }
-        
-    }
-
-
 }

@@ -46,4 +46,23 @@ public class Enemy : MonoBehaviour
 		player.healthController.Damage(damage);
 		originFactory.Reclaim(this);
 	}
+
+	public void ApplyDamage(int damage)
+	{
+		Debug.Assert(damage >= 0, "Negative damage applied.");
+		health -= damage;
+		GameUpdate();
+	}
+
+	public bool GameUpdate()
+	{
+
+		if(health <= 0)
+		{
+			originFactory.Reclaim(this);
+			return false;
+		}
+		return true;
+
+	}
 }

@@ -12,6 +12,7 @@ public class SpawnController : MonoBehaviour
     public float offsetTime;
     float waitedTime;
 
+    [SerializeField]
     public GameScenario scenario;
     int cycle, waveIndex;
 

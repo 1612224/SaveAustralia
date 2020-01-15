@@ -16,6 +16,8 @@ TagManager:
   - Fire
   - Destination
   - Enemy
+  - RockTower
+  - RockTowerCanvas
   layers:
   - Default
   - TransparentFX
@@ -25,10 +27,10 @@ TagManager:
   - UI
   - 
   - 
+  - GameTile
+  - Tower
   - Enemy
-  - 
-  - 
-  - 
+  - CanvasTower
   - 
   - 
   - 

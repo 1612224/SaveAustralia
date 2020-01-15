@@ -8,6 +8,7 @@ public class GameTileContent : MonoBehaviour
 
 	public GameTileContentType Type => type;
 
+	[SerializeField]
 	GameTileContentFactory originFactory;
 
 	public GameTileContentFactory OriginFactory
@@ -22,10 +23,16 @@ public class GameTileContent : MonoBehaviour
 
 	public void Recycle()
 	{
-		originFactory.Reclaim(this);
+		if (originFactory)
+		{
+			originFactory.Reclaim(this);
+		} else
+		{
+			CustomDestroy.SafeDestroy(gameObject);
+		}
 	}
 
-	public virtual void OnTouch()
+	public virtual void GameUpdate()
 	{
 
 	}
