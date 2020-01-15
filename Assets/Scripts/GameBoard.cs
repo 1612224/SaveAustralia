@@ -27,9 +27,26 @@ public class GameBoard : MonoBehaviour
         return spawnPoints[index];
     }
 
+    public GameTile spawnPoint;
     public GameTile destination;
 
     public NavMeshSurface navmesh;
+
+    //Tower targeting
+    public List<GameTileContent> updatingContent = new List<GameTileContent>();
+
+    public void AddUpdatingContent(GameTileContent gameTile)
+    {
+        updatingContent.Add(gameTile);
+    }
+    public void GameUpdate()
+    {
+        for(int i = 0; i < updatingContent.Count; ++i)
+        {
+            updatingContent[i].GameUpdate();
+        }
+    }
+
 
     public void ReadBoardFromText(string filename)
     {
@@ -74,7 +91,7 @@ public class GameBoard : MonoBehaviour
                         case GameTileContentType.Destination: file.Write("D"); break;
                         case GameTileContentType.Spawn: file.Write("S"); break;
                         case GameTileContentType.Wall: file.Write("W"); break;
-                        case GameTileContentType.Tower: file.Write("R"); break;
+                        case GameTileContentType.RockTower: file.Write("R"); break;
                     }
                 }
                 file.Write("\n");
@@ -84,7 +101,7 @@ public class GameBoard : MonoBehaviour
 
     public GameTile GetTile(Ray ray)
     {
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue,1))
         {
             int x = (int)(hit.point.x + size.x * 0.5f);
             int y = (int)(hit.point.z + size.y * 0.5f);
@@ -187,4 +204,6 @@ public class GameBoard : MonoBehaviour
         }
         navmesh.BuildNavMesh();
     }
+
+   
 }

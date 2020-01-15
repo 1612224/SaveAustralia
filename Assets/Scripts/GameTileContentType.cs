@@ -1,5 +1,6 @@
 ﻿public enum GameTileContentType
 {
 	Empty, Destination,
-	Wall, Spawn, Tree, Tower,
+	Wall, Spawn, Tree, 
+	RockTower,MortarTower,
 }

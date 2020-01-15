@@ -16,6 +16,11 @@ public class Game : MonoBehaviour
     [SerializeField]
     EnemyFactory enemyFactory = default;
 
+    [SerializeField]
+    TowerFactory towerFactory = default;
+
+    
+
     [SerializeField, Range(0.1f, 10f)]
     float spawnSpeed = 1f;
     float spawnProgress;
@@ -35,15 +40,23 @@ public class Game : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        Tower t = towerFactory.Get(canvas,GameTileContentType.RockTower,board);
+        t.SetPosition(new Vector3(60,0,-50));
+        Tower t1 = towerFactory.Get(canvas, GameTileContentType.RockTower,board);
+        t1.SetPosition(new Vector3(70,0,-50));
+    }
+
     void Update()
     {
         // Gameplay
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameTile tile = board.GetTile(TouchRay);
-            if (tile?.Content.Type == GameTileContentType.Wall)
-                tile.Content = tileContentFactory.Get(GameTileContentType.Tower);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    GameTile tile = board.GetTile(TouchRay);
+        //    if (tile?.Content.Type == GameTileContentType.Wall)
+        //        tile.Content = tileContentFactory.Get(GameTileContentType.RockTower);
+        //}
 
         spawnProgress += spawnSpeed * Time.deltaTime;
         while (spawnProgress >= 1f)
@@ -51,14 +64,23 @@ public class Game : MonoBehaviour
             spawnProgress -= 1f;
             SpawnEnemy();
         }
+
+        Physics.SyncTransforms();
+        board.GameUpdate();
     }
+
+  
 
     private void SpawnEnemy()
     {
-        GameTile spawnPoint =
-            board.GetSpawnPoint(Random.Range(0, board.SpawnPointCount));
+        //GameTile spawnPoint =
+        //    board.GetSpawnPoint(Random.Range(0, board.SpawnPointCount));
+        //Enemy enemy = enemyFactory.Get();
+        //enemy.SpawnOn(spawnPoint);
+        //enemy.SetDestination(board.destination);
         Enemy enemy = enemyFactory.Get();
-        enemy.SpawnOn(spawnPoint);
+        enemy.SpawnOn(board.spawnPoint);
+        enemy.Initialize(1);
         enemy.SetDestination(board.destination);
     }
 }
