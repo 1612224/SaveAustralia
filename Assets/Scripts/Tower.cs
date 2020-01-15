@@ -3,37 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Tower : GameTileContent
+public abstract class Tower : GameTileContent
 {
     [SerializeField, Range(10.5f, 20.5f)]
     protected float targetingRange = 16.5f;
     [SerializeField, Range(50f, 200f)]
-    float damagePerSecond = 50f;
-    [SerializeField]
-    Transform turret = default, laserBeam = default;
+    protected float damagePerSecond = 50f;
 
-    
-    TargetPoint target;
+
     const int enemyLayerMask = 1 << 10;
-    static Collider[] targetsBuffer = new Collider[1];
-    Vector3 laserBeamScale;
-
+    static Collider[] targetsBuffer = new Collider[10];
     private TowerFactory towerFactory;
 
     // Start is called before the first frame update
     void Awake()
     {
-        laserBeamScale = laserBeam.localScale;
-    }
 
-    public TowerFactory OriginFactory
-    {
-        get => towerFactory;
-        set
-        {
-            Debug.Assert(towerFactory == null, "Redefined origin factory!");
-            towerFactory = value;
-        }
     }
 
     public void SetPosition(Vector3 pos)
@@ -48,10 +33,10 @@ public class Tower : GameTileContent
         position.y += 0.01f;
         Gizmos.DrawWireSphere(position, targetingRange);
 
-        if(target != null)
-        {
-            Gizmos.DrawLine(position, target.Position);
-        }
+        //if(target != null)
+        //{
+        //    Gizmos.DrawLine(position, target.Position);
+        //}
     }
     // Update is called once per frame
     void Update()
@@ -59,33 +44,14 @@ public class Tower : GameTileContent
         
     }
 
-    public override void GameUpdate()
+    public TowerFactory OriginFactory
     {
-        if (transform.root.GetComponent<TowerController>() &&
-            transform.root.GetComponent<TowerController>()._CurrLevelIndex > 0 &&
-            (TrackTarget(ref target) || AcquireTarget(out target)))
+        get => towerFactory;
+        set
         {
-            Shoot();
+            Debug.Assert(towerFactory == null, "Redefined origin factory!");
+            towerFactory = value;
         }
-        else
-        {
-            laserBeam.localScale = Vector3.zero;
-        }
-    }
-
-    protected void Shoot()
-    {
-        Vector3 point = target.Position;
-        laserBeam.LookAt(point);
-        //laserBeam.localRotation = turret.localRotation;
-
-        float d = Vector3.Distance(turret.position, target.Position);
-        laserBeamScale.z = d;
-        laserBeam.localScale = laserBeamScale;
-        laserBeam.position = turret.position + 0.5f * d * laserBeam.forward;
-
-        target.Enemy.ApplyDamage(damagePerSecond*Time.deltaTime);
-
     }
 
     protected bool AcquireTarget(out TargetPoint target)
@@ -118,10 +84,8 @@ public class Tower : GameTileContent
         }
         return true;
     }
-
     public void AddDamage(float damage)
     {
         damagePerSecond += damage;
     }
-
 }

@@ -121,9 +121,9 @@ GameObject:
   - component: {fileID: 9032819054766161332}
   - component: {fileID: 9032819054766161334}
   - component: {fileID: 9032819054766161335}
-  - component: {fileID: 7576331494382837124}
+  - component: {fileID: 8064679209479617614}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: LaserTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TowerLevelsTag: RockTower
   _TowerGoldCost: 
+  _CurrLevelIndex: 0
 --- !u!65 &9032819054766161335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7576331494382837124
+--- !u!114 &8064679209479617614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9032819054766161333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 147c0b02ac5754040b102298e893e72e, type: 3}
+  m_Script: {fileID: 11500000, guid: c146ce99dcf658f4683ff172d5ef5d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
@@ -602,11 +603,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9032819054766161332}
     m_Modifications:
-    - target: {fileID: 4306696103086562209, guid: 62fa48bc1906edf4798662c5e1b00e2f,
-        type: 3}
-      propertyPath: m_Name
-      value: Laser Beam
-      objectReference: {fileID: 0}
     - target: {fileID: 4306696103086562214, guid: 62fa48bc1906edf4798662c5e1b00e2f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -661,6 +657,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306696103086562209, guid: 62fa48bc1906edf4798662c5e1b00e2f,
+        type: 3}
+      propertyPath: m_Name
+      value: Laser Beam
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62fa48bc1906edf4798662c5e1b00e2f, type: 3}

@@ -43,6 +43,7 @@ public class GameBoard : MonoBehaviour
     {
         for(int i = 0; i < updatingContent.Count; ++i)
         {
+            if (updatingContent[i] == null) continue;
             updatingContent[i].GameUpdate();
         }
     }

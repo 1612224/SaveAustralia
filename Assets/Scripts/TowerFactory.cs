@@ -32,7 +32,7 @@ public class TowerFactory : GameObjectFactory
 			instance.transform.root.GetComponent<TowerController>().initial(canvas, _RockTowerLevelsTag, _RockTowerCanvasTag, _RockTowerGoldCost);
 			instance.OriginFactory = this;
 		}
-
+        
 		board.AddUpdatingContent(instance);
 		return instance;
 	}
