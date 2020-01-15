@@ -24,7 +24,7 @@ public class GameTileContentFactory : GameObjectFactory
 	GameTileContent treePrefab = default;
 
 	[SerializeField]
-	GameTileContent towerPrefab = default;
+	GameTileContent rockTowerPrefab = default;
 
 	public GameTileContent Get(GameTileContentType type)
 	{
@@ -35,7 +35,7 @@ public class GameTileContentFactory : GameObjectFactory
 			case GameTileContentType.Wall: return Get(highWallPrefab);
 			case GameTileContentType.Spawn: return Get(spawnPrefab);
 			case GameTileContentType.Tree: return Get(treePrefab);
-			case GameTileContentType.Tower: return Get(towerPrefab);
+			case GameTileContentType.RockTower: return Get(rockTowerPrefab);
 		}
 		Debug.Assert(false, "Unsupported type: " + type);
 		return null;

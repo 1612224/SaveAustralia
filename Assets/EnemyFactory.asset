@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7532bfc9640a4340abb1ecf31e8410c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8676e184706f0e84c90671d04eb32153, type: 3}
   m_Name: EnemyFactory
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2931602830708564878, guid: d6101e043e8d2ff48930196529531f86, type: 3}
+  prefab: {fileID: 7099400893303145646, guid: d6101e043e8d2ff48930196529531f86, type: 3}

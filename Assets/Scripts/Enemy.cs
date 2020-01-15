@@ -6,9 +6,20 @@ public class Enemy : MonoBehaviour
 	NavMeshAgent agent;
 	EnemyFactory originFactory;
 
+	float Health { get; set; }
+	public float Scale { get; set; }
+
+	public void Initialize(float scale)
+	{
+		Scale = scale;
+		Health = 100f * scale;
+	}
+
 	void Awake()
 	{
-		agent = GetComponent<NavMeshAgent>();
+		
+		agent = transform.root.GetComponent<NavMeshAgent>();
+		Debug.Assert(agent != null, "AWake - Enemy without navgent!");
 	}
 
 	public EnemyFactory OriginFactory
@@ -28,6 +39,26 @@ public class Enemy : MonoBehaviour
 
 	public void SetDestination(GameTile tile)
 	{
+		Debug.Assert(agent != null, "SetDestination - Enemy without navgent!");
 		agent.SetDestination(tile.transform.position);
+	}
+
+	public void ApplyDamage(float damage)
+	{
+		Debug.Assert(damage >= 0, "Negative damage applied.");
+		Health -= damage;
+		GameUpdate();
+	}
+
+	public bool GameUpdate()
+	{
+
+		if(Health <= 0)
+		{
+			originFactory.Reclaim(this);
+			return false;
+		}
+		return true;
+
 	}
 }

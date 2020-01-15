@@ -4,16 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Tower
   - TowerGroup
-  - TowerUIlv1
-  - TowerUIlv2
-  - TowerUIlv3
-  - Towerlv0
-  - Towerlv1
+  - Tower
+  - RockTower
+  - RockTowerCanvas
   - Towerlv2
+  - Towerlv0
   - Towerlv3
-  - Fire
+  - Towerlv1
   layers:
   - Default
   - TransparentFX
@@ -23,10 +21,10 @@ TagManager:
   - UI
   - 
   - 
+  - Player
+  - Tower
   - Enemy
-  - 
-  - 
-  - 
+  - CanvasTower
   - 
   - 
   - 

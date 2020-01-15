@@ -4,104 +4,110 @@ using UnityEngine;
 
 public class TowerController : MonoBehaviour
 {
-    public List<string> _levels_UI = new List<string>(){ "TowerUIlv1", "TowerUIlv2", "TowerUIlv3" };
-    private List<string> _levels = new List<string>() { "Towerlv0","Towerlv1", "Towerlv2", "Towerlv3" };
-    private int[] _gold_cost = {0, 5, 10, 15 };
-    private List<Transform> childTowerOBject = new List<Transform>();
-    private List<Transform> childTowerUIButton = new List<Transform>();
-    private int _curr_level = 0;
-    private int MAX_LEVEL = 3;
-    private bool _is_showing_UI_button = false;
+    
+    public string _TowerLevelsTag = "RockTower";
+    public List<int> _TowerGoldCost = new List<int>();
+    private List<Transform> _ChildTowerObject = new List<Transform>();
+    public int _CurrLevelIndex = 0;
+    private bool _IsTowerCanvasShowing = false;
+
+    private TowerCanvasController _TowerCanvasController;
+
+  
 
     void Start()
     {
-        
-        for(int i =0;i < transform.childCount; ++i)
-        {
+        GetChildObject();
+    }
+    public void initial(Canvas canvas,string towerTag, string canvasTag,List<int> golds)
+    {
 
+        _TowerLevelsTag = towerTag;
+        GetChildObject();
+
+        _TowerGoldCost.Clear();
+        _TowerGoldCost = golds;
+
+        _TowerCanvasController = canvas.GetComponent<TowerCanvasController>();
+        _TowerCanvasController.initial(canvasTag);
+    }
+  
+    private void GetChildObject()
+    {
+        for (int i = 0; i < transform.childCount; ++i)
+        {
             Transform child = transform.GetChild(i);
-            for (int j =0; j < _levels_UI.Count; ++j)
+            if (child.gameObject.tag == _TowerLevelsTag)
             {
-                if(child.gameObject.tag == _levels_UI[j])
-                {
-                    childTowerUIButton.Add(child);
-                    break;
-                }
-                
-                
+                _ChildTowerObject.Add(child);
             }
-            for (int j = 0; j < _levels.Count; ++j)
-            {
-                if (child.gameObject.tag == _levels[j])
-                {
-                    childTowerOBject.Add(child);
-                    break;
-                }
-                
-            }
-            
         }
     }
-    
+
     // Update is called once per frame
     void Update()
     {
         
     }
-    public bool isCapableUpLevel(int gold)
-    {
-        if (_is_showing_UI_button && _curr_level < MAX_LEVEL && gold <= _gold_cost[_curr_level+1])
-        {
-            return true;
-        }
-        return false;
-    }
+
+
     public int UpLevel(int gold)
     {
-        if(_is_showing_UI_button && _curr_level < MAX_LEVEL && gold >= _gold_cost[_curr_level+1])
+        if(_IsTowerCanvasShowing && _CurrLevelIndex + 1 < _ChildTowerObject.Count && gold >= _TowerGoldCost[_CurrLevelIndex+1])
         {
-            ++_curr_level;
-            for(int i = 0; i < childTowerOBject.Count; ++i)
+            ++_CurrLevelIndex;
+            for(int i = 0; i < _ChildTowerObject.Count; ++i)
             {
-                childTowerOBject[i].gameObject.SetActive(false);
+                _ChildTowerObject[i].gameObject.SetActive(false);
             }
-            Debug.Log(_curr_level);
-            childTowerOBject[_curr_level].gameObject.SetActive(true);
-            return _gold_cost[_curr_level];
+            _ChildTowerObject[_CurrLevelIndex].gameObject.SetActive(true);
+            transform.root.GetComponent<Tower>().AddDamage(_CurrLevelIndex);
+            return _TowerGoldCost[_CurrLevelIndex];
         }
         return 0;
+
 
     }
 
     
 
-    public void Click(Transform ClickedObject, int gold)
+    public void HideDisplayCanvas()
     {
-        
-        if (ClickedObject == null && _curr_level-1 < MAX_LEVEL)
+        // Show/Hide canvas options
+        if (_CurrLevelIndex + 1 < _ChildTowerObject.Count)
         {
-            _is_showing_UI_button = !_is_showing_UI_button;
-            DisplayChildUIButtonLevel();
+            _IsTowerCanvasShowing = !_IsTowerCanvasShowing;
+            if (_IsTowerCanvasShowing)
+            {
+                _TowerCanvasController.SetCurrTower(gameObject);
+            }
+            else
+            {
+                _TowerCanvasController.SetCurrTower(null);
+            }
+            HideAndDisplayTowerCanvasNextLevel();
         }
        
-        else if (ClickedObject != null && _is_showing_UI_button && IsChildUIButtonClicked(ClickedObject) )
-        {
-            
-            UpLevel(gold);
-            _is_showing_UI_button = false;
-            DisplayChildUIButtonLevel();
-
-
-        }
+     
     }
 
-    public bool IsChildUIButtonClicked(Transform button)
+    public void TowerUpLevelClick()
     {
-        Debug.Log(button.gameObject.GetInstanceID());
-        for(int i = 0; i < childTowerUIButton.Count; ++i)
+        UpLevel(100);
+       
+    }
+
+    public int GetNextLevelGold()
+    {
+        return _CurrLevelIndex + 1 < _ChildTowerObject.Count ? _TowerGoldCost[_CurrLevelIndex + 1]:-1;
+    }
+
+   
+    public bool IsChildObjectClicked(Transform tower)
+    {
+        for (int i = 0; i < _ChildTowerObject.Count; ++i)
         {
-            Debug.Log(childTowerUIButton[i].gameObject.GetInstanceID());
-            if (button.gameObject.GetInstanceID() == childTowerUIButton[i].gameObject.GetInstanceID())
+            if (tower.gameObject.GetInstanceID() == _ChildTowerObject[i].gameObject.GetInstanceID())
             {
                 return true;
             }
@@ -109,24 +115,26 @@ public class TowerController : MonoBehaviour
         return false;
     }
 
-    public void DisplayChildUIButtonLevel()
+    public void HideAndDisplayTowerCanvasNextLevel()
     {
-        for (int i = 0; i < childTowerUIButton.Count; ++i)
+        _TowerCanvasController.SetActiveAllRockTowerCanvas(false);
+        _TowerCanvasController._GoldText.gameObject.SetActive(false);
+
+        if(_IsTowerCanvasShowing && _CurrLevelIndex +1 < _ChildTowerObject.Count)
         {
-            childTowerUIButton[i].gameObject.SetActive(false);
+            // Draw image
+            _TowerCanvasController.DrawCanvasToPosition(_TowerCanvasController._TowerCanvas.transform.GetChild(_CurrLevelIndex).gameObject,
+                new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 15, gameObject.transform.position.z),
+                _IsTowerCanvasShowing);
+
+            //Draw gold text
+            _TowerCanvasController.DrawCanvasToPosition(_TowerCanvasController._GoldText.gameObject,
+                   new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 25, gameObject.transform.position.z),
+                   _IsTowerCanvasShowing);
+            int gold = GetNextLevelGold();
+            _TowerCanvasController._GoldText.SetText(gold == -1 ? "" : gold.ToString());
         }
-        if(_curr_level < MAX_LEVEL)
-        {
-            childTowerUIButton[_curr_level].gameObject.SetActive(_is_showing_UI_button);
-        }
-                     
-        
-      
     }
 
-    public float Damage()
-    {
-        return 100 + _curr_level * 100;
-    }
-
+    
 }

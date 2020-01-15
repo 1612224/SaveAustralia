@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[SelectionBase]
 public class GameTileContent : MonoBehaviour
 {
 
@@ -30,5 +31,10 @@ public class GameTileContent : MonoBehaviour
 	public virtual void OnTouch()
 	{
 
+	}
+
+	public virtual void GameUpdate()
+	{
+		
 	}
 }
