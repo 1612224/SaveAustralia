@@ -5,27 +5,43 @@ using UnityEngine;
 [CreateAssetMenu]
 public class TowerFactory : GameObjectFactory
 {
-	// RockTower
-	private string _RockTowerLevelsTag = "RockTower";
-	private List<int> _RockTowerGoldCost = new List<int>(){ 0, 5, 10, 15 };
-	private string _RockTowerCanvasTag = "RockTowerCanvas";
+	[System.Serializable]
+	public class TowerConfig
+	{
+		public Tower prefab = default;
+		public int price = 100;
+		public int upgradePrice = 50;
+	}
 
-	[SerializeField]
-	Tower defaultPrefab = default;
-	[SerializeField]
-	Tower rockPrefab = default;
+	public TowerConfig laser;
+	public TowerConfig ballistic;
 
-	[SerializeField]
-	Tower laserTower = default;
-	[SerializeField]
-	Tower ballisticTower = default;
+	public int GetPrice(TowerType type)
+	{
+		switch (type)
+		{
+			case TowerType.Laser: return laser.price;
+			case TowerType.Ballistic: return ballistic.price;
+			default: throw new System.Exception("Unsupported tower type");
+		}
+	}
+
+	public int GetUpgradePrice(TowerType type)
+	{
+		switch (type)
+		{
+			case TowerType.Laser: return laser.upgradePrice;
+			case TowerType.Ballistic: return ballistic.upgradePrice;
+			default: throw new System.Exception("Unsupported tower type");
+		}
+	}
 
 	public Tower Get(TowerType type)
 	{
 		switch(type)
 		{
-			case TowerType.Laser: return Get(laserTower);
-			case TowerType.Ballistic: return Get(ballisticTower);
+			case TowerType.Laser: return Get(laser.prefab);
+			case TowerType.Ballistic: return Get(ballistic.prefab);
 			default: throw new System.Exception("Unsupported tower type");
 		}
 	}
@@ -37,29 +53,9 @@ public class TowerFactory : GameObjectFactory
 		return instance;
 	}
 
-	public Tower Get(Canvas canvas, GameTileContentType type, GameBoard board)
+	public void Reclaim(Tower tower)
 	{
-		Tower instance;
-		if (type == GameTileContentType.RockTower)
-		{
-			instance = CreateGameObjectInstance(rockPrefab);
-			instance.transform.root.GetComponent<TowerController>().initial(canvas, _RockTowerLevelsTag, _RockTowerCanvasTag, _RockTowerGoldCost);
-			instance.OriginFactory = this;
-
-		}
-		else
-		{
-			instance = CreateGameObjectInstance(defaultPrefab);
-			instance.transform.root.GetComponent<TowerController>().initial(canvas, _RockTowerLevelsTag, _RockTowerCanvasTag, _RockTowerGoldCost);
-			instance.OriginFactory = this;
-		}
-
-		return instance;
-	}
-
-	public void Reclaim(Enemy enemy)
-	{
-		Debug.Assert(enemy.OriginFactory == this, "Wrong factory reclaimed!");
-		Destroy(enemy.gameObject);
+		Debug.Assert(tower.OriginFactory == this, "Wrong factory reclaimed!");
+		Destroy(tower.gameObject);
 	}
 }

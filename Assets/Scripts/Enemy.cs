@@ -7,6 +7,7 @@ public class Enemy : GameBehavior
 	EnemyFactory originFactory;
 	public int damage = 10;
 	public int health = 100;
+	public int gold = 10;
 
 	public PlayerStatsManager player;
 
@@ -25,9 +26,10 @@ public class Enemy : GameBehavior
 		}
 	}
 
-	public void Initialize(int health)
+	public void Initialize(int health, int gold)
 	{
 		this.health = health;
+		this.gold = gold;
 	}
 
 
@@ -61,6 +63,7 @@ public class Enemy : GameBehavior
 		if(health <= 0)
 		{
 			originFactory.Reclaim(this);
+			player.goldController.Sell(gold);
 			return false;
 		}
 		return true;

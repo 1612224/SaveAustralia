@@ -36,4 +36,12 @@ public class PanelsController : MonoBehaviour
     {
         panel.SetActive(false);
     }
+
+    public void DeactivateAllPanel()
+    {
+        foreach(var p in panels)
+        {
+            p.SetActive(false);
+        }
+    }
 }

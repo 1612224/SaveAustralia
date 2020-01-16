@@ -14,7 +14,7 @@ public abstract class Tower : GameTileContent
     const int enemyLayerMask = 1 << 10;
     static Collider[] targetsBuffer = new Collider[10];
 
-    private TowerFactory towerFactory;
+    public TowerType towerType;
 
     // Start is called before the first frame update
     void Awake()
@@ -23,6 +23,7 @@ public abstract class Tower : GameTileContent
 
     public abstract TowerType TowerType { get; }
 
+    private TowerFactory towerFactory;
     public TowerFactory OriginFactory
     {
         get => towerFactory;
@@ -32,6 +33,7 @@ public abstract class Tower : GameTileContent
             towerFactory = value;
         }
     }
+    
 
     public void SetPosition(Vector3 pos)
     {
@@ -86,7 +88,6 @@ public abstract class Tower : GameTileContent
 
     protected bool TrackTarget(ref TargetPoint target)
     {
-        //Debug.Log(target);
         if (target == null)
         {
             return false;

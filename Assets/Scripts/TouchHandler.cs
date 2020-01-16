@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TowerGroupController : MonoBehaviour
+public class TouchHandler : MonoBehaviour
 {
     [SerializeField]
     GameBoard board;
@@ -44,7 +44,7 @@ public class TowerGroupController : MonoBehaviour
             if (tile == null)
             {
                 touchOnNothingEvent.Invoke();
-            }
+            } 
             else if (tile.Content.Type == GameTileContentType.Tower) 
             {
                 towerTouchEvent.Invoke(tile);

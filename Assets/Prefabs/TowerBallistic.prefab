@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9032819054766161334}
   - component: {fileID: 9032819054766161335}
   - component: {fileID: 3734525462385563216}
+  - component: {fileID: 268233795485443147}
   m_Layer: 9
   m_Name: TowerBallistic
   m_TagString: Untagged
@@ -77,13 +78,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee01bf750ae19de49903b0786a90a070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 6
+  type: 5
   originFactory: {fileID: 0}
   targetingRange: 2
   shotsPerSecond: 1
   mortar: {fileID: 7186087314674890102}
   shellBlastRadius: 1
   shellDamage: 50
+--- !u!114 &268233795485443147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032819054766161333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e63f5ed8fe48749b96bfd4e53cdbc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelModels:
+  - {fileID: 2533263240645417276}
+  - {fileID: 698038116298874564}
+  - {fileID: 2254658258005035334}
 --- !u!1001 &2792417141196496492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,6 +286,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 366bb29044f7a3c4984bc502b2c21938, type: 3}
+--- !u!1 &2533263240645417276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 366bb29044f7a3c4984bc502b2c21938,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766323210856874037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1548302201723513647 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 366bb29044f7a3c4984bc502b2c21938,
@@ -370,6 +393,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b2f40ef314ecd9429eafb58d7fba15d, type: 3}
+--- !u!1 &2254658258005035334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6b2f40ef314ecd9429eafb58d7fba15d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7812560814397050959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2959285404594633557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6b2f40ef314ecd9429eafb58d7fba15d,
@@ -471,6 +500,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e34ea8d3ad29b741a3f430308ca030a, type: 3}
+--- !u!1 &698038116298874564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 4e34ea8d3ad29b741a3f430308ca030a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8830996887963305933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4608506432767896791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 4e34ea8d3ad29b741a3f430308ca030a,

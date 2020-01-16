@@ -8,6 +8,7 @@ public class EnemyFactory : GameObjectFactory
     {
         public Enemy prefab = default;
         public int health = 100;
+        public int gold = 10;
     }
 
     [SerializeField]
@@ -31,7 +32,7 @@ public class EnemyFactory : GameObjectFactory
         EnemyConfig config = GetConfig(type);
         Enemy instance = CreateGameObjectInstance(config.prefab);
         instance.OriginFactory = this;
-        instance.Initialize(config.health);
+        instance.Initialize(config.health, config.gold);
         return instance;
     }
 
