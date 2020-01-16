@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class MortarTower : Tower
 {
-	[SerializeField, Range(1f, 100f)]
-	float damagePerSecond = 10f;
-
 	[SerializeField]
-	Transform turret = default, laserBeam = default;
-
-	TargetPoint target;
-
-	Vector3 laserBeamScale;
+	Transform turret = default;    
 
 	void Awake()
 	{
-		laserBeamScale = laserBeam.localScale;
+		
 	}
 
-	public override void GameUpdate()
+    public override TowerType TowerType => TowerType.Ballistic;
+
+    public override void GameUpdate()
 	{
 		if (TrackTarget(ref target) || AcquireTarget(out target))
 		{
@@ -27,11 +22,11 @@ public class MortarTower : Tower
 		}
 		else
 		{
-			laserBeam.localScale = Vector3.zero;
+			
 		}
 	}
 
-	void Shoot()
+	protected override void Shoot()
 	{
 		
 	}

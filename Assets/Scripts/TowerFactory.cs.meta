@@ -3,7 +3,13 @@ guid: c8d2a99df735db74397416dc8a9b2367
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - defaultPrefab: {instanceID: 0}
+  - rockPrefab: {instanceID: 0}
+  - laserTower: {fileID: 6540070190854030314, guid: 6d7513e018f29644d9781437e4144ea0,
+      type: 3}
+  - ballisticTower: {fileID: 6540070190854030314, guid: 6d7513e018f29644d9781437e4144ea0,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -22,6 +22,7 @@ public class TowerFactory : GameObjectFactory
 
 	public Tower Get(TowerType type)
 	{
+        Debug.Log((laserTower == null) + " " + (ballisticTower == null));
 		switch(type)
 		{
 			case TowerType.Laser: return Get(laserTower);
@@ -32,7 +33,7 @@ public class TowerFactory : GameObjectFactory
 
 	Tower Get(Tower prefab)
 	{
-		Tower instance = CreateGameObjectInstance(rockPrefab);
+		Tower instance = CreateGameObjectInstance(prefab);
 		instance.OriginFactory = this;
 		return instance;
 	}
