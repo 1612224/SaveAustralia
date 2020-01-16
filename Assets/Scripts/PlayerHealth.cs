@@ -6,11 +6,11 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour
 {
     int currentHealth;
-    public int maxHealth = 100;
+    public static int maxHealth = 100;
 
     [Header("Health Events")]
-    public MyIntEvent damageEvent;
-    public MyIntEvent healEvent;
+    public IntEvent damageEvent;
+    public IntEvent healEvent;
     public UnityEvent deadEvent;
 
     public int CurrentHealth()
@@ -24,11 +24,11 @@ public class PlayerHealth : MonoBehaviour
 
         if (damageEvent == null)
         {
-            damageEvent = new MyIntEvent();
+            damageEvent = new IntEvent();
         }
         if (healEvent == null)
         {
-            healEvent = new MyIntEvent();
+            healEvent = new IntEvent();
         }
         if (deadEvent == null)
         {

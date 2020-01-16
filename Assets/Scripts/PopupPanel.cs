@@ -7,16 +7,12 @@ public class PopupPanel : MonoBehaviour
     [SerializeField]
     Vector2 offset;
 
+    [SerializeField]
     RectTransform rectTransform;
-
-    void Awake()
-    {
-        rectTransform = GetComponent<RectTransform>();
-    }
 
     public void AlignTo(Vector3 position)
     {
         Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, position);
-        rectTransform.anchoredPosition = screenPosition;
+        rectTransform.anchoredPosition = screenPosition + offset;
     }
 }

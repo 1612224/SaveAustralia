@@ -17,15 +17,10 @@ public class Tower : GameTileContent
     static Collider[] targetsBuffer = new Collider[1];
     Vector3 laserBeamScale;
 
-    private TowerFactory towerFactory;
+    public TowerType towerType;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        laserBeamScale = laserBeam.localScale;
-    }
-
-    public TowerFactory OriginFactory
+    private TowerFactory towerFactory;      
+    public new TowerFactory OriginFactory
     {
         get => towerFactory;
         set
@@ -33,6 +28,12 @@ public class Tower : GameTileContent
             Debug.Assert(towerFactory == null, "Redefined origin factory!");
             towerFactory = value;
         }
+    }
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        laserBeamScale = laserBeam.localScale;
     }
 
     public void SetPosition(Vector3 pos)
@@ -60,9 +61,7 @@ public class Tower : GameTileContent
 
     public override void GameUpdate()
     {
-        if (transform.root.GetComponent<TowerController>() &&
-            transform.root.GetComponent<TowerController>()._CurrLevelIndex > 0 &&
-            (TrackTarget(ref target) || AcquireTarget(out target)))
+        if ((TrackTarget(ref target) || AcquireTarget(out target)))
         {
             Shoot();
         }
@@ -76,7 +75,6 @@ public class Tower : GameTileContent
     {
         Vector3 point = target.Position;
         laserBeam.LookAt(point);
-        //laserBeam.localRotation = turret.localRotation;
 
         float d = Vector3.Distance(turret.position, target.Position);
         laserBeamScale.z = d;
@@ -84,7 +82,6 @@ public class Tower : GameTileContent
         laserBeam.position = turret.position + 0.5f * d * laserBeam.forward;
 
         target.Enemy.ApplyDamage(damagePerSecond);
-
     }
 
     protected bool AcquireTarget(out TargetPoint target)
@@ -104,7 +101,6 @@ public class Tower : GameTileContent
 
     protected bool TrackTarget(ref TargetPoint target)
     {
-        Debug.Log(target);
         if (target == null)
         {
             return false;
