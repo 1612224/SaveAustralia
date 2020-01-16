@@ -80,8 +80,5 @@ public abstract class Tower : GameTileContent
     }
 
     public abstract void UpLevel(int level);
-    public virtual void AddDamage(int damage)
-    {
-        
-    }
+    public abstract void AddDamage(int damage);
 }

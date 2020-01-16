@@ -69,5 +69,6 @@ public class LaserTower : Tower
 
     public override void UpLevel(int level)
     {
+        AddDamage(level);
     }
 }

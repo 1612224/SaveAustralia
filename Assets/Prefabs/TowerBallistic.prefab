@@ -81,7 +81,7 @@ MonoBehaviour:
   type: 5
   originFactory: {fileID: 0}
   targetingRange: 2
-  towerType: 0
+  towerType: 1
   shotsPerSecond: 1
   mortar: {fileID: 7186087314674890102}
   shellBlastRadius: 1

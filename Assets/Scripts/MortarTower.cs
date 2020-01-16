@@ -21,6 +21,11 @@ public class MortarTower : Tower
         OnValidate();
     }
 
+    void Update()
+    {
+        GameUpdate();
+    }
+
     void OnValidate()
     {
         float x = targetingRange + 0.25001f;
@@ -29,7 +34,7 @@ public class MortarTower : Tower
     }
 
     public override void GameUpdate()
-	{
+    {
         launchProgress += shotsPerSecond * Time.deltaTime;
         while (launchProgress >= 1f)
         {
@@ -80,7 +85,7 @@ public class MortarTower : Tower
         AddDamage(level);
     }
 
-    private void AddDamage(int level)
+    public override void AddDamage(int level)
     {
         shellDamage += 5 * level;
     }
