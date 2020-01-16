@@ -23,8 +23,8 @@ public abstract class Tower : GameTileContent
 
     public abstract TowerType TowerType { get; }
 
+    private TowerFactory towerFactory;
     public TowerFactory OriginFactory
-    private TowerFactory towerFactory; 
     {
         get => towerFactory;
         set
@@ -33,12 +33,7 @@ public abstract class Tower : GameTileContent
             towerFactory = value;
         }
     }
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        laserBeamScale = laserBeam.localScale;
-    }
+    
 
     public void SetPosition(Vector3 pos)
     {
