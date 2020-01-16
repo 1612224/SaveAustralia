@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : GameBehavior
 {
 	NavMeshAgent agent;
 	EnemyFactory originFactory;
@@ -51,12 +51,13 @@ public class Enemy : MonoBehaviour
 
 	public void ApplyDamage(int damage)
 	{
+        Debug.Log("Apply damage " + damage + " and HP: " + health);
 		Debug.Assert(damage >= 0, "Negative damage applied.");
 		health -= damage;
 		GameUpdate();
 	}
 
-	public bool GameUpdate()
+	public override bool GameUpdate()
 	{
 
 		if(health <= 0)

@@ -52,7 +52,7 @@ public class TowerController : MonoBehaviour
                 _ChildTowerObject[i].gameObject.SetActive(false);
             }
             _ChildTowerObject[_CurrLevelIndex].gameObject.SetActive(true);
-            transform.root.GetComponent<Tower>().AddDamage(_CurrLevelIndex);
+            transform.root.GetComponent<Tower>().UpLevel(_CurrLevelIndex);
             return _TowerGoldCost[_CurrLevelIndex];
         }
         return 0;

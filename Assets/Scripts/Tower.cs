@@ -14,8 +14,15 @@ public abstract class Tower : GameTileContent
 
     public TowerType towerType;
 
+    // Start is called before the first frame update
+    void Awake()
+    {
+    }
+
+    public abstract TowerType TowerType { get; }
+
     private TowerFactory towerFactory;
-    public new TowerFactory OriginFactory
+    public TowerFactory OriginFactory
     {
         get => towerFactory;
         set
@@ -24,6 +31,7 @@ public abstract class Tower : GameTileContent
             towerFactory = value;
         }
     }
+    
 
 
 
@@ -45,13 +53,12 @@ public abstract class Tower : GameTileContent
 
     protected bool AcquireTarget(out TargetPoint target)
     {
-        int hits = Physics.OverlapSphereNonAlloc(
-            transform.position, targetingRange, targetsBuffer, enemyLayerMask
-        );
-        if (hits > 0)
+        //int hits = Physics.OverlapSphereNonAlloc(
+        //    transform.position, targetingRange, targetsBuffer, enemyLayerMask
+        //);
+        if (TargetPoint.FillBuffer(transform.localPosition, targetingRange))
         {
-            target = targetsBuffer[0].GetComponent<TargetPoint>();
-            Debug.Assert(target != null, "Targeted non-enemy!", targetsBuffer[0]);
+            target = TargetPoint.RandomBuffered;
             return true;
         }
         target = null;
@@ -74,6 +81,7 @@ public abstract class Tower : GameTileContent
         return true;
     }
 
+    public abstract void UpLevel(int level);
     public virtual void AddDamage(int damage)
     {
         

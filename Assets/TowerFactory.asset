@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: TowerFactory
   m_EditorClassIdentifier: 
   laser:
-    prefab: {fileID: 7576331494382837124, guid: 706124cbc29cd3c4abf8c71826fa478f,
+    prefab: {fileID: 2915330433053147650, guid: 706124cbc29cd3c4abf8c71826fa478f,
       type: 3}
     price: 100
     upgradePrice: 50
   ballistic:
-    prefab: {fileID: 6211701521965006119, guid: 6d7513e018f29644d9781437e4144ea0,
+    prefab: {fileID: 3734525462385563216, guid: 83ba23a71165e1c4183c90a8ae1bce3d,
       type: 3}
     price: 200
     upgradePrice: 100

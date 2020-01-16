@@ -23,5 +23,6 @@ MonoBehaviour:
     type: 3}
   treePrefab: {fileID: 4580593927554398379, guid: 2103a1f3e46199542a46e43950616e3c,
     type: 3}
-  towerPrefab: {fileID: 6503415882046558136, guid: 6d7513e018f29644d9781437e4144ea0,
-    type: 3}
+  towerPrefabs:
+  - {fileID: 6540070190854030314, guid: 6d7513e018f29644d9781437e4144ea0, type: 3}
+  - {fileID: 3734525462385563216, guid: 83ba23a71165e1c4183c90a8ae1bce3d, type: 3}

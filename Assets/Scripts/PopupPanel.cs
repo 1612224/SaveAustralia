@@ -12,6 +12,11 @@ public class PopupPanel : MonoBehaviour
 
     public void AlignTo(Vector3 position)
     {
+        if (!rectTransform)
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
+
         Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, position);
         rectTransform.anchoredPosition = screenPosition + offset;
     }

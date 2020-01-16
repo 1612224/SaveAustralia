@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b25ff5bab0d6043bdca8570edb8d29, type: 3}
+  m_Script: {fileID: 11500000, guid: 75a6394b6bc0bef43bebdabc95af6c71, type: 3}
   m_Name: WarFactory
   m_EditorClassIdentifier: 
-  shellPrefab: {fileID: 7663375196787904179, guid: ef9555aca8bc97c4fa37694bb7b33704,
+  explosionPrefab: {fileID: 1161512175873076227, guid: 639d128d9b01187478738447b6a385b7,
     type: 3}
-  explosionPrefab: {fileID: 8668051987438947529, guid: 1db774c2715664440bf0431da6ea97bb,
+  shellPrefab: {fileID: -2121290980799684935, guid: cc97dd689ce83c442915677a0a265be3,
     type: 3}
