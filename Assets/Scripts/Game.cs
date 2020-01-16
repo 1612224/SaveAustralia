@@ -19,6 +19,9 @@ public class Game : MonoBehaviour
     [SerializeField]
     TowerFactory towerFactory = default;
 
+    [SerializeField]
+    WarFactory warFactory = default;
+
     static Game instance;
 
     const float pausedTimeScale = 0f;
@@ -60,5 +63,17 @@ public class Game : MonoBehaviour
         }
 
         Physics.SyncTransforms();
+    }
+
+    public static Shell SpawnShell()
+    {
+        Shell shell = instance.warFactory.Shell;
+        return shell;
+    }
+
+    public static Explosion SpawnExplosion()
+    {
+        Explosion explosion = instance.warFactory.Explosion;
+        return explosion;
     }
 }
