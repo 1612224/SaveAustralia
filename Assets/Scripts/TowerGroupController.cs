@@ -40,7 +40,7 @@ public class TowerGroupController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !panelsController.AnyPanelActive)
         {
             GameTile tile = board.GetTile(TouchRay);
-            Debug.Log(tile.Content.Type);
+            if(tile) Debug.Log(tile.Content.Type);
             if (tile == null)
             {
                 touchOnNothingEvent.Invoke();
@@ -48,6 +48,9 @@ public class TowerGroupController : MonoBehaviour
             else if (tile.Content.Type == GameTileContentType.Tower) 
             {
                 towerTouchEvent.Invoke(tile);
+                //TEST
+                TowerController towerCtrl = tile.Content.GetComponent<TowerController>();
+                towerCtrl.UpLevel(999);
             } 
             else if (tile.Content.Type == GameTileContentType.Wall) 
             {

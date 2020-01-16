@@ -80,9 +80,10 @@ MonoBehaviour:
   type: 6
   originFactory: {fileID: 0}
   targetingRange: 2
-  damagePerSecond: 1
-  damagePerSecond: 1
-  turret: {fileID: 7186087314674890102}
+  shotsPerSecond: 1
+  mortar: {fileID: 7186087314674890102}
+  shellBlastRadius: 1
+  shellDamage: 50
 --- !u!1001 &2792417141196496492
 PrefabInstance:
   m_ObjectHideFlags: 0

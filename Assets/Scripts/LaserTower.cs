@@ -7,6 +7,8 @@ public class LaserTower : Tower
     [SerializeField]
     Transform turret = default, laserBeam = default;
     Vector3 laserBeamScale;
+    [SerializeField, Range(1, 10)]
+    protected int damagePerSecond = 1;
 
     // Start is called before the first frame update
     void Awake()
@@ -41,17 +43,26 @@ public class LaserTower : Tower
         }
     }
 
-    protected override void Shoot()
+    protected void Shoot()
     {
         Vector3 point = target.Position;
         laserBeam.LookAt(point);
         //laserBeam.localRotation = turret.localRotation;
-
+        
         float d = Vector3.Distance(turret.position, target.Position);
         laserBeamScale.z = d;
         laserBeam.localScale = laserBeamScale;
         laserBeam.position = turret.position + 0.5f * d* laserBeam.forward;
 
         target.Enemy.ApplyDamage(damagePerSecond);
+    }
+
+    public override void UpLevel(int level)
+    {
+        AddDamage(level);
+    }
+    public void AddDamage(int damage)
+    {
+        damagePerSecond += damage;
     }
 }

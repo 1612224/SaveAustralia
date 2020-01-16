@@ -22,7 +22,6 @@ public class TowerFactory : GameObjectFactory
 
 	public Tower Get(TowerType type)
 	{
-        Debug.Log((laserTower == null) + " " + (ballisticTower == null));
 		switch(type)
 		{
 			case TowerType.Laser: return Get(laserTower);

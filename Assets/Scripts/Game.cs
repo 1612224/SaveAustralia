@@ -19,6 +19,11 @@ public class Game : MonoBehaviour
     [SerializeField]
     TowerFactory towerFactory = default;
 
+    [SerializeField]
+    WarFactory warFactory = default;
+
+    GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
+
     static Game instance;
 
     const float pausedTimeScale = 0f;
@@ -31,6 +36,20 @@ public class Game : MonoBehaviour
     void OnEnable()
     {
         instance = this;
+    }
+
+    public static Shell SpawnShell()
+    {
+        Shell shell = instance.warFactory.Shell;
+        instance.nonEnemies.Add(shell);
+        return shell;
+    }
+
+    public static Explosion SpawnExplosion()
+    {
+        Explosion explosion = instance.warFactory.Explosion;
+        instance.nonEnemies.Add(explosion);
+        return explosion;
     }
 
     void OnValidate()
@@ -59,6 +78,7 @@ public class Game : MonoBehaviour
             Time.timeScale = playSpeed;
         }
 
+        nonEnemies.GameUpdate();
         Physics.SyncTransforms();
     }
 }

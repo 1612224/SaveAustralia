@@ -7,8 +7,8 @@ public abstract class Tower : GameTileContent
 {
     [SerializeField, Range(0f, 3f)]
     protected float targetingRange = 2f;
-    [SerializeField, Range(1, 10)]
-    protected int damagePerSecond = 1;
+    //[SerializeField, Range(1, 10)]
+    //protected int damagePerSecond = 1;
     
     protected TargetPoint target;
     const int enemyLayerMask = 1 << 10;
@@ -70,30 +70,14 @@ public abstract class Tower : GameTileContent
         //}
     }
 
-    protected abstract void Shoot();
-    //{
-        //Vector3 point = target.Position;
-        //laserBeam.LookAt(point);
-        ////laserBeam.localRotation = turret.localRotation;
-
-        //float d = Vector3.Distance(turret.position, target.Position);
-        //laserBeamScale.z = d;
-        //laserBeam.localScale = laserBeamScale;
-        //laserBeam.position = turret.position + 0.5f * d * laserBeam.forward;
-
-        //target.Enemy.ApplyDamage(damagePerSecond);
-
-    //}
-
     protected bool AcquireTarget(out TargetPoint target)
     {
-        int hits = Physics.OverlapSphereNonAlloc(
-            transform.position, targetingRange, targetsBuffer, enemyLayerMask
-        );
-        if (hits > 0)
+        //int hits = Physics.OverlapSphereNonAlloc(
+        //    transform.position, targetingRange, targetsBuffer, enemyLayerMask
+        //);
+        if (TargetPoint.FillBuffer(transform.localPosition, targetingRange))
         {
-            target = targetsBuffer[0].GetComponent<TargetPoint>();
-            Debug.Assert(target != null, "Targeted non-enemy!", targetsBuffer[0]);
+            target = TargetPoint.RandomBuffered;
             return true;
         }
         target = null;
@@ -102,7 +86,7 @@ public abstract class Tower : GameTileContent
 
     protected bool TrackTarget(ref TargetPoint target)
     {
-        Debug.Log(target);
+        //Debug.Log(target);
         if (target == null)
         {
             return false;
@@ -117,8 +101,5 @@ public abstract class Tower : GameTileContent
         return true;
     }
 
-    public void AddDamage(int damage)
-    {
-        damagePerSecond += damage;
-    }
+    public abstract void UpLevel(int level);
 }
