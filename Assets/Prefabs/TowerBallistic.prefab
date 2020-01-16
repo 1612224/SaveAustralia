@@ -81,10 +81,11 @@ MonoBehaviour:
   type: 5
   originFactory: {fileID: 0}
   targetingRange: 2
+  towerType: 0
   shotsPerSecond: 1
   mortar: {fileID: 7186087314674890102}
   shellBlastRadius: 1
-  shellDamage: 50
+  shellDamage: 30
 --- !u!114 &268233795485443147
 MonoBehaviour:
   m_ObjectHideFlags: 0

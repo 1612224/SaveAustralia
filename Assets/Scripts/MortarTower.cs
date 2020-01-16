@@ -15,7 +15,7 @@ public class MortarTower : Tower
     float shellBlastRadius = 1f;
 
     [SerializeField, Range(1, 100)]
-    int shellDamage = 50;
+    int shellDamage = 30;
     void Awake()
     {
         OnValidate();
@@ -79,11 +79,11 @@ public class MortarTower : Tower
 
     public override void UpLevel(int level)
     {
-        AddShotPerSecond(level);
+        AddDamage(level);
     }
 
-    private void AddShotPerSecond(int shot)
+    private void AddDamage(int level)
     {
-        shotsPerSecond += shot;
+        shellDamage += 5 * level;
     }
 }
