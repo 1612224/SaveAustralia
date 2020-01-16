@@ -51,7 +51,6 @@ public class Enemy : GameBehavior
 
 	public void ApplyDamage(int damage)
 	{
-        Debug.Log("Apply damage " + damage + " and HP: " + health);
 		Debug.Assert(damage >= 0, "Negative damage applied.");
 		health -= damage;
 		GameUpdate();

@@ -72,15 +72,6 @@ public class RockTower : Tower
         float x = dir.magnitude;
         dir /= x;
 
-        Debug.DrawLine(launchPoint, targetPoint, Color.yellow);
-        Debug.DrawLine(
-            new Vector3(launchPoint.x, 0.01f, launchPoint.z),
-            new Vector3(
-                launchPoint.x + dir.x * x, 0.01f, launchPoint.z + dir.y * x
-            ),
-            Color.white
-        );
-
         shotsProgress += shotsSpeed * Time.deltaTime;
         if (shotsProgress >= 0.5f)
         {
@@ -91,5 +82,9 @@ public class RockTower : Tower
             shellBlastRadius, shellDamage);
         }       
         
+    }
+
+    public override void UpLevel(int level)
+    {
     }
 }

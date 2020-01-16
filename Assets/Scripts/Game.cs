@@ -81,16 +81,4 @@ public class Game : MonoBehaviour
         nonEnemies.GameUpdate();
         Physics.SyncTransforms();
     }
-
-    public static Shell SpawnShell()
-    {
-        Shell shell = instance.warFactory.Shell;
-        return shell;
-    }
-
-    public static Explosion SpawnExplosion()
-    {
-        Explosion explosion = instance.warFactory.Explosion;
-        return explosion;
-    }
 }

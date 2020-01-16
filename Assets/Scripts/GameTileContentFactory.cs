@@ -45,7 +45,7 @@ public class GameTileContentFactory : GameObjectFactory
     {
         Debug.Assert((int)type < towerPrefabs.Length, "Unsupported tower type!");
         Tower prefab = towerPrefabs[(int)type];
-        Debug.Assert(type == prefab.TowerType, "Tower prefab at wrong index!");
+        Debug.Assert(type == prefab.towerType, "Tower prefab at wrong index!");
         return Get(prefab);
     }
 

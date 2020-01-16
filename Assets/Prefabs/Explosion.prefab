@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 768ab7136ea0bb14f810757b13a7a378, type: 2}
+  - {fileID: 2100000, guid: 4520c6a7583849f45bbd1b2b6231860d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2354350502500089717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 415c34f1908d10d4b976cc28df03d749, type: 3}
+  m_Script: {fileID: 11500000, guid: f724b38e930b1ce4f9962e9dd429bcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.5
@@ -109,31 +109,40 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.0765344
-      outSlope: 1.0765344
+      time: -0.016666412
+      value: 0.98117065
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.15155146
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.48868933
-      value: 0.3889379
-      inSlope: 0.0023841956
-      outSlope: 0.0023841956
+      time: 0.5991672
+      value: 0.8854033
+      inSlope: -0.1539432
+      outSlope: -0.1539432
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.43568513
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9874878
-      value: -0.0023536682
-      inSlope: -1.6448965
-      outSlope: -1.6448965
+      time: 0.91355795
+      value: 0.5540391
+      inSlope: -0.32459927
+      outSlope: -0.32459927
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.090737835
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0041829
+      value: 0.15765183
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

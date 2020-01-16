@@ -101,8 +101,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9032819054766161332}
   - component: {fileID: 9032819054766161335}
-  - component: {fileID: 4336418614842633362}
   - component: {fileID: 6211701521965006119}
+  - component: {fileID: 5854644845105092788}
   m_Layer: 9
   m_Name: BallisticTower
   m_TagString: Untagged
@@ -141,22 +141,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6540070190854030314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9032819054766161333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55ca381a0396ee54baf6806eb593ff0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelModels:
-  - {fileID: 5250160661361144701}
-  - {fileID: 2298516035887799481}
-  - {fileID: 2433788964410448175}
 --- !u!114 &6211701521965006119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,8 +160,24 @@ MonoBehaviour:
   shotsPerSecond: 1
   mortar: {fileID: 3353726649111253339}
   shotsSpeed: 0.3
-  shellBlastRadius: 0.7
+  shellBlastRadius: 1
   shellDamage: 100
+--- !u!114 &5854644845105092788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032819054766161333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e63f5ed8fe48749b96bfd4e53cdbc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelModels:
+  - {fileID: 5250160661361144701}
+  - {fileID: 2298516035887799481}
+  - {fileID: 2433788964410448175}
 --- !u!1001 &4322818305571580532
 PrefabInstance:
   m_ObjectHideFlags: 0

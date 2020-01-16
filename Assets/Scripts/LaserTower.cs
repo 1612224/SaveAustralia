@@ -15,6 +15,8 @@ public class LaserTower : Tower
 
     Vector3 laserBeamScale;
 
+    float cumulatedTime;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,6 +44,7 @@ public class LaserTower : Tower
 
     protected override void Shoot()
     {
+        cumulatedTime += Time.deltaTime;
         Vector3 point = target.Position;
         laserBeam.LookAt(point);
         water.LookAt(point);
@@ -52,11 +55,19 @@ public class LaserTower : Tower
         laserBeam.localScale = laserBeamScale;
         laserBeam.position = turret.position + 0.5f * d * laserBeam.forward;
 
-        target.Enemy.ApplyDamage(damagePerSecond);
+        while (cumulatedTime >= 1f)
+        {
+            target.Enemy.ApplyDamage(damagePerSecond);
+            cumulatedTime -= 1f;
+        }
     }
 
     public override void AddDamage(int damage)
     {
         damagePerSecond += damage;
+    }
+
+    public override void UpLevel(int level)
+    {
     }
 }

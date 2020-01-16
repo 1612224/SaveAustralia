@@ -49,9 +49,9 @@ public class Explosion : WarEntity
             propertyBlock = new MaterialPropertyBlock();
         }
         float t = age / duration;
-        Color c = Color.clear;
+        Color c = GetComponent<Renderer>().material.color;
         c.a = opacityCurve.Evaluate(t);
-        c.r = 1; c.g = 0.8f; c.b = 0.21f;
+        //c.r = 1; c.g = 0.8f; c.b = 0.21f;
         propertyBlock.SetColor(colorPropertyID, c);
         meshRenderer.SetPropertyBlock(propertyBlock);
         transform.localScale = Vector3.one * (scale * scaleCurve.Evaluate(t));

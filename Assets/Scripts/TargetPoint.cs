@@ -25,12 +25,6 @@ public class TargetPoint : MonoBehaviour
         Debug.Assert(LayerMask.LayerToName(gameObject.layer) == "Enemy", "Target point must be on Enemy layer", this);
     }
 
-    const int enemyLayerMask = 1 << 10;
-
-    static Collider[] buffer = new Collider[100];
-
-    public static int BufferedCount { get; private set; }
-
     public static bool FillBuffer(Vector3 position, float range)
     {
         Vector3 top = position;
@@ -48,25 +42,6 @@ public class TargetPoint : MonoBehaviour
         return target;
     }
 
-
-    public static bool FillBuffer(Vector3 position, float range)
-    {
-        //Debug.Log("fill buffer");
-        Vector3 top = position;
-        top.y += 3f;
-        BufferedCount = Physics.OverlapSphereNonAlloc(
-            position, range, buffer, enemyLayerMask
-        );
-        //Debug.Log("Fill Buffer and found: " + BufferedCount + " " + buffer);
-        return BufferedCount > 0;
-    }
-
-    public static TargetPoint GetBuffered(int index)
-    {
-        var target = buffer[index].GetComponent<TargetPoint>();
-        Debug.Assert(target != null, "Targeted non-enemy!", buffer[0]);
-        return target;
-    }
 
     public static TargetPoint RandomBuffered =>
     GetBuffered(Random.Range(0, BufferedCount));

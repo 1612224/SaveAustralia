@@ -19,10 +19,8 @@ public abstract class Tower : GameTileContent
     {
     }
 
-    public abstract TowerType TowerType { get; }
-
     private TowerFactory towerFactory;
-    public TowerFactory OriginFactory
+    public new TowerFactory OriginFactory
     {
         get => towerFactory;
         set

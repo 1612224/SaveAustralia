@@ -28,8 +28,6 @@ public class MortarTower : Tower
         launchSpeed = Mathf.Sqrt(9.81f * (y + Mathf.Sqrt(x * x + y * y)));
     }
 
-    public override TowerType TowerType => TowerType.Ballistic;
-
     public override void GameUpdate()
 	{
         launchProgress += shotsPerSecond * Time.deltaTime;

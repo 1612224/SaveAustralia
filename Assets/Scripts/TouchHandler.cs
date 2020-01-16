@@ -40,7 +40,6 @@ public class TouchHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !panelsController.AnyPanelActive)
         {
             GameTile tile = board.GetTile(TouchRay);
-            if(tile) Debug.Log(tile.Content.Type);
             if (tile == null)
             {
                 touchOnNothingEvent.Invoke();
