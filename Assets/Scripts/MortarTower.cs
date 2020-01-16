@@ -18,8 +18,10 @@ public class MortarTower : Tower
 	{
 		laserBeamScale = laserBeam.localScale;
 	}
+    
+    public override TowerType TowerType => TowerType.Mortar;
 
-	public override void GameUpdate()
+    public override void GameUpdate()
 	{
 		if (TrackTarget(ref target) || AcquireTarget(out target))
 		{

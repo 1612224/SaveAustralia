@@ -21,6 +21,8 @@ public abstract class Tower : GameTileContent
 
     }
 
+    public abstract TowerType TowerType { get; }
+
     public void SetPosition(Vector3 pos)
     {
         transform.position = pos;

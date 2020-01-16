@@ -24,6 +24,8 @@ public class LaserTower : Tower
         
     }
 
+    public override TowerType TowerType => TowerType.Laser;
+
     public override void GameUpdate()
     {
         if (transform.root.GetComponent<TowerController>() &&
