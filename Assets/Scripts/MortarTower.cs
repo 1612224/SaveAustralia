@@ -28,6 +28,6 @@ public class MortarTower : Tower
 
 	protected override void Shoot()
 	{
-		
+        Debug.Log("MORTAL SHOOT");	
 	}
 }

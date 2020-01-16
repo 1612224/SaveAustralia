@@ -89,6 +89,7 @@ public abstract class Tower : GameTileContent
 
     protected bool AcquireTarget(out TargetPoint target)
     {
+        Debug.Log("Acquiring");
         int hits = Physics.OverlapSphereNonAlloc(
             transform.position, targetingRange, targetsBuffer, enemyLayerMask
         );
@@ -96,6 +97,7 @@ public abstract class Tower : GameTileContent
         {
             target = targetsBuffer[0].GetComponent<TargetPoint>();
             Debug.Assert(target != null, "Targeted non-enemy!", targetsBuffer[0]);
+            Debug.Log("target " + target.name);
             return true;
         }
         target = null;

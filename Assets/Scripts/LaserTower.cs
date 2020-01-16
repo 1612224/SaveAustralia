@@ -29,9 +29,7 @@ public class LaserTower : Tower
 
     public override void GameUpdate()
     {
-        if (transform.root.GetComponent<TowerController>() &&
-            transform.root.GetComponent<TowerController>()._CurrLevelIndex > 0 &&
-            (TrackTarget(ref target) || AcquireTarget(out target)))
+        if (TrackTarget(ref target) || AcquireTarget(out target))
         {
             Shoot();
         }
