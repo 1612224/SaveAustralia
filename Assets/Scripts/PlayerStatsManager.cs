@@ -5,4 +5,5 @@ using UnityEngine;
 public class PlayerStatsManager : MonoBehaviour
 {
     public PlayerHealth healthController;
+    public PlayerGold goldController;
 }

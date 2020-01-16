@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class TileTouchEvent : UnityEvent<GameTile>
-{
-}
+public class TileTouchEvent : UnityEvent<GameTile> { }
+
+[System.Serializable]
+public class IntEvent : UnityEvent<int> { }

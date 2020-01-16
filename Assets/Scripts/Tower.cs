@@ -14,7 +14,7 @@ public abstract class Tower : GameTileContent
     const int enemyLayerMask = 1 << 10;
     static Collider[] targetsBuffer = new Collider[10];
 
-    private TowerFactory towerFactory;
+    public TowerType towerType;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,6 +24,7 @@ public abstract class Tower : GameTileContent
     public abstract TowerType TowerType { get; }
 
     public TowerFactory OriginFactory
+    private TowerFactory towerFactory; 
     {
         get => towerFactory;
         set
@@ -31,6 +32,12 @@ public abstract class Tower : GameTileContent
             Debug.Assert(towerFactory == null, "Redefined origin factory!");
             towerFactory = value;
         }
+    }
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        laserBeamScale = laserBeam.localScale;
     }
 
     public void SetPosition(Vector3 pos)
@@ -102,7 +109,6 @@ public abstract class Tower : GameTileContent
 
     protected bool TrackTarget(ref TargetPoint target)
     {
-        Debug.Log(target);
         if (target == null)
         {
             return false;

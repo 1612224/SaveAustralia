@@ -87,7 +87,6 @@ public class GameBoard : MonoBehaviour
                         case GameTileContentType.Destination: file.Write("D"); break;
                         case GameTileContentType.Spawn: file.Write("S"); break;
                         case GameTileContentType.Wall: file.Write("W"); break;
-                        case GameTileContentType.RockTower: file.Write("R"); break;
                     }
                 }
                 file.Write("\n");

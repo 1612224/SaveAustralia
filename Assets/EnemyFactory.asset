@@ -16,11 +16,14 @@ MonoBehaviour:
     prefab: {fileID: 2931602830708564878, guid: d6101e043e8d2ff48930196529531f86,
       type: 3}
     health: 100
+    gold: 10
   medium:
     prefab: {fileID: 3726253617231066469, guid: bb2490e722237fe4783621224ca8b153,
       type: 3}
     health: 100
+    gold: 20
   large:
     prefab: {fileID: 6068853840505413365, guid: 46967f52632f50747af40949de13f034,
       type: 3}
     health: 100
+    gold: 50

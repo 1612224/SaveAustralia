@@ -6,15 +6,14 @@ using UnityEngine.UI;
 public class HealthUIController : MonoBehaviour
 {
     public Slider slider;
-    public PlayerHealth player;
 
     void Awake()
     {
-        slider.value = player.maxHealth;
+        slider.value = PlayerHealth.maxHealth;
     }
 
     public void UpdateHealthUI(int health)
     {
-        slider.value = player.CurrentHealth();
+        slider.value = health;
     }
 }
