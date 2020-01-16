@@ -21,6 +21,7 @@ public class TowerLevelController : MonoBehaviour
         if (currentLevel < levelModels.Length)
         {
             ActivateModel(currentLevel++);
+            GetComponent<Tower>().UpLevel(currentLevel);
         }
     }
 
