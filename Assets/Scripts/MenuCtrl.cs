@@ -27,4 +27,16 @@ public class MenuCtrl : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void RetryGame()
+    {
+        GameObject obj = GameObject.FindGameObjectWithTag("GameOverIndex");
+        if (obj)
+        {
+            int index = obj.GetComponent<GameOverIndex>().index;
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            SceneManager.LoadSceneAsync(index);
+            Destroy(obj);
+        }
+    }
 }

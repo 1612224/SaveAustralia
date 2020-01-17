@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -48,6 +49,13 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth == 0)
         {
             deadEvent.Invoke();
+            GameObject obj = new GameObject();
+            GameOverIndex component = obj.AddComponent<GameOverIndex>();
+            obj.tag = "GameOverIndex";
+            component.index = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            SceneManager.LoadScene(5);
+            Debug.Log("DEAD");
         }
     }
 }
