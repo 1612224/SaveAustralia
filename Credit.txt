@@ -1,0 +1,13 @@
+Music:
+https://www.youtube.com/watch?v=WUcOcll3rLw
+https://www.youtube.com/watch?v=ouaJNRkaCuk
+
+Font:
+Inlanders: https://dl.dafont.com/dl/?f=inlanders
+Mermaid: https://dl.dafont.com/dl/?f=mermaid
+
+Splash art made of a lot of googled images.
+
+Enemy:
+RPG Monster Duo PBR Polyart: https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
+Stone Monster: https://assetstore.unity.com/packages/3d/characters/stone-monster-101433
