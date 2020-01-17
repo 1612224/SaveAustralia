@@ -48,8 +48,8 @@ public class TouchHandler : MonoBehaviour
             {
                 towerTouchEvent.Invoke(tile);
                 //TEST
-                TowerController towerCtrl = tile.Content.GetComponent<TowerController>();
-                towerCtrl.UpLevel(999);
+                //TowerController towerCtrl = tile.Content.GetComponent<TowerController>();
+                //towerCtrl.UpLevel(999);
             } 
             else if (tile.Content.Type == GameTileContentType.Wall) 
             {
