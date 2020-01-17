@@ -30,7 +30,7 @@ public class TowerUpgradeController : MonoBehaviour
         tower = tile.Content as Tower;
         levelController = tower.GetComponent<TowerLevelController>();
 
-        Debug.Log(tower.towerType);
+        //Debug.Log(tower.towerType);
 
         upgradePanel.SetActive(false);
         maxLevelPanel.SetActive(false);
