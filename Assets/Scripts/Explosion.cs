@@ -3,7 +3,7 @@
 public class Explosion : WarEntity
 {
 
-    [SerializeField, Range(0f, 1f)]
+    [SerializeField, Range(0f, 5f)]
     float duration = 0.5f;
     [SerializeField]
     AnimationCurve opacityCurve = default;
@@ -17,12 +17,11 @@ public class Explosion : WarEntity
 	
 	float scale;
 
-    MeshRenderer meshRenderer;
 
     void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        Debug.Assert(meshRenderer != null, "Explosion without renderer!");
+        //meshRenderer = GetComponent<MeshRenderer>();
+        //Debug.Assert(meshRenderer != null, "Explosion without renderer!");
     }
 
     public void Initialize(Vector3 position, float blastRadius, int damage)
@@ -33,7 +32,7 @@ public class Explosion : WarEntity
             TargetPoint.GetBuffered(i).Enemy.ApplyDamage(damage);
         }
         transform.localPosition = position;
-        scale = 2f * blastRadius;
+        scale = blastRadius * 0.5f;
     }
 
     public override bool GameUpdate()
@@ -49,11 +48,6 @@ public class Explosion : WarEntity
             propertyBlock = new MaterialPropertyBlock();
         }
         float t = age / duration;
-        Color c = GetComponent<Renderer>().material.color;
-        c.a = opacityCurve.Evaluate(t);
-        //c.r = 1; c.g = 0.8f; c.b = 0.21f;
-        propertyBlock.SetColor(colorPropertyID, c);
-        meshRenderer.SetPropertyBlock(propertyBlock);
         transform.localScale = Vector3.one * (scale * scaleCurve.Evaluate(t));
         return true;
     }

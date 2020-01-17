@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Shell : WarEntity {
@@ -26,6 +27,8 @@ public class Shell : WarEntity {
         if (p.y <= 0f)
         {
             Game.SpawnExplosion().Initialize(targetPoint, blastRadius, damage);
+            //new Task(() => { Game.SpawnExplosion().Initialize(targetPoint, blastRadius, damage); }).Start();
+            //Task.Run(() => Game.SpawnExplosion().Initialize(targetPoint, blastRadius, damage));
             OriginFactory.Reclaim(this);
             return false;
         }
