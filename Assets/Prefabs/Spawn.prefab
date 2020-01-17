@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4835620360934049825}
   m_Layer: 0
   m_Name: Spawn
-  m_TagString: Untagged
+  m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  originFactory: {fileID: 0}
 --- !u!114 &4835620360934049825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +62,8 @@ MonoBehaviour:
   destination: {fileID: 0}
   spawnPoint: {fileID: 0}
   player: {fileID: 0}
+  offsetTime: 0
+  scenario: {fileID: 0}
   isFinished: 0
 --- !u!1 &2164559050957485729
 GameObject:

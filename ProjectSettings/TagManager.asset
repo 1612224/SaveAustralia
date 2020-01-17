@@ -18,6 +18,8 @@ TagManager:
   - Enemy
   - RockTower
   - RockTowerCanvas
+  - Spawn
+  - Music
   layers:
   - Default
   - TransparentFX

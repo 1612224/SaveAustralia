@@ -33,6 +33,7 @@ public class EnemyFactory : GameObjectFactory
         Enemy instance = CreateGameObjectInstance(config.prefab);
         instance.OriginFactory = this;
         instance.Initialize(config.health, config.gold);
+        Enemy.instanceCount += 1;
         return instance;
     }
 
@@ -40,6 +41,7 @@ public class EnemyFactory : GameObjectFactory
     {
         Debug.Assert(enemy.OriginFactory == this, "Wrong factory reclaimed!");
         Destroy(enemy.gameObject);
+        Enemy.instanceCount -= 1;
     }
 
 

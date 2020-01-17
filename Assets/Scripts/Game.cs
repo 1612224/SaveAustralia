@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class Game : MonoBehaviour
 
     static Game instance;
 
+    bool waitForNextScene = false;
+
     const float pausedTimeScale = 0f;
 
     [SerializeField, Range(1f, 10f)]
@@ -36,6 +39,7 @@ public class Game : MonoBehaviour
     void OnEnable()
     {
         instance = this;
+        waitForNextScene = false;
     }
 
     public static Shell SpawnShell()
@@ -65,8 +69,35 @@ public class Game : MonoBehaviour
         }
     }
 
+    private bool IsRoundFinished()
+    {
+        GameObject[] spawnObj = GameObject.FindGameObjectsWithTag("Spawn");
+        if (Enemy.instanceCount > 0)
+            return false;
+
+        //Debug.Log("COUNT SPAwN:" + spawnObj.Length);
+        foreach(var o in spawnObj)
+        {
+            SpawnController spawn = o.GetComponent<SpawnController>();
+            if (spawn)
+            {
+                if (!spawn.isFinished) return false;
+            }
+        }
+
+        return true;
+    }
+
     void Update()
     {
+        if (IsRoundFinished() && !waitForNextScene)
+        {
+            int idx = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.UnloadSceneAsync(idx);
+            SceneManager.LoadSceneAsync(idx + 1);
+            waitForNextScene = true;
+            return;
+        }
         // Time control for testing
         if (Input.GetKeyDown(KeyCode.Space))
         {

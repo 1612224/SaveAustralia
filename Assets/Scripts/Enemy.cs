@@ -10,6 +10,7 @@ public class Enemy : GameBehavior
 	public int gold = 10;
 
 	public PlayerStatsManager player;
+    public static int instanceCount = 0;
 
 	void Awake()
 	{

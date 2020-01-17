@@ -37,6 +37,7 @@ public class SpawnController : MonoBehaviour
     {
         wave = scenario.waves[0];
         sequence = wave.spawnSequences[0];
+        gameObject.tag = "Spawn";
     }
 
     void Update()
